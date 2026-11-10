@@ -1,0 +1,35 @@
+{
+  "name": "date-alert",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && concurrently -k -n worker,web -c cyan,magenta \"wrangler dev\" \"vite --config web/vite.config.ts\"",
+    "build": "vite build --config web/vite.config.ts",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "db:remote": "wrangler d1 migrations apply DB --remote",
+    "test": "vitest run",
+    "init": "node scripts/init.mjs",
+    "reset:password": "node scripts/reset-password.mjs",
+    "deploy": "npm run build && wrangler d1 migrations apply DB --remote && wrangler deploy",
+    "cron:local": "curl -s http://localhost:8787/cdn-cgi/local/scheduled && echo ' (\u5df2\u624b\u52a8\u89e6\u53d1\u4e00\u6b21\u5b9a\u65f6\u4efb\u52a1)'"
+  },
+  "dependencies": {
+    "hono": "^4.13.17",
+    "vue": "^3.5.45",
+    "vue-router": "^5.4.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261109.1",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "autoprefixer": "^10.6.2",
+    "concurrently": "^10.0.7",
+    "postcss": "^8.5.32",
+    "puppeteer-core": "^25.16.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^7.0.2",
+    "vite": "^7.3.8",
+    "vitest": "^3.2.7",
+    "wrangler": "^4.159.0"
+  }
+}

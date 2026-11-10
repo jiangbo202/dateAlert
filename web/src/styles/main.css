@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-accent: #2563eb;
+  --radius-card: 16px;
+  --radius-control: 10px;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 8px 24px rgb(0 0 0 / 0.1);
+  --duration: 160ms;
+  --easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='dark'] {
+  --color-bg: #0b1220;
+  --color-surface: #111a2c;
+  --color-text: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-border: #1e2a44;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-card-hover: 0 8px 24px rgb(0 0 0 / 0.5);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans TC',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* 卡片配色：由单一规则色派生（BR-2） */
+.reminder-card {
+  --c: #3b82f6;
+  background: color-mix(in srgb, var(--c) 8%, #fff);
+  border-left: 4px solid var(--c);
+  color: color-mix(in srgb, var(--c) 65%, #111);
+}
+
+[data-theme='dark'] .reminder-card {
+  background: color-mix(in srgb, var(--c) 18%, #0f172a);
+  color: color-mix(in srgb, var(--c) 35%, #fff);
+}
+
+.reminder-card__chip {
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+}
+
+[data-theme='dark'] .reminder-card__chip {
+  background: color-mix(in srgb, var(--c) 24%, #0f172a);
+}
+
+/* 剩余天数 <= 1 的呼吸动画 */
+@keyframes card-breathe {
+  0%,
+  100% {
+    box-shadow: var(--shadow-card);
+  }
+  50% {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent);
+  }
+}
+
+.reminder-card[data-urgent='true'] {
+  animation: card-breathe 3s var(--easing) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reminder-card,
+  .reminder-card[data-urgent='true'] {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* 备注默认 2 行，鼠标悬停时展开全文 */
+.reminder-card__note {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.reminder-card:hover .reminder-card__note {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
