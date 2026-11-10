@@ -123,6 +123,7 @@ authRoutes.post('/login', async (c) => {
   c.header('Set-Cookie', sessionCookie(c, session.token, ttl));
 
   return c.json({
+    initialized: true,
     authenticated: true,
     mustChangePassword: admin?.must_change_password === 1,
   });

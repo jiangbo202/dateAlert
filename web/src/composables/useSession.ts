@@ -47,7 +47,7 @@ async function login(password: string, remember: boolean): Promise<ApiError | nu
       method: 'POST',
       body: JSON.stringify({ password, remember }),
     });
-    initialized.value = data.initialized;
+    initialized.value = data.initialized ?? true;
     authenticated.value = true;
     mustChangePassword.value = data.mustChangePassword;
     loaded.value = true;

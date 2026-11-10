@@ -37,8 +37,8 @@ router.beforeEach(async (to) => {
 
   if (!authenticated.value) return { name: 'login', query: { next: to.fullPath } };
 
+  // 强制改密期间，除改密页外一律拦截
   if (mustChangePassword.value && to.name !== 'change-password') return { name: 'change-password' };
-  if (!mustChangePassword.value && to.name === 'change-password') return { name: 'admin' };
 
   return true;
 });

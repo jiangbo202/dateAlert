@@ -107,6 +107,13 @@ async function signOut(): Promise<void> {
 
       <h1 class="text-xl font-semibold">{{ mustChangePassword ? t('pwd.titleForced') : t('pwd.title') }}</h1>
       <p class="mt-1 text-xs text-muted">{{ t('pwd.desc') }}</p>
+      <RouterLink
+        v-if="!mustChangePassword"
+        to="/admin"
+        class="mt-3 inline-block text-xs text-muted underline-offset-2 hover:text-accent hover:underline"
+      >
+        ← {{ t('admin.badge') }}
+      </RouterLink>
 
       <form class="mt-6 space-y-4" @submit.prevent="submit">
         <div>
