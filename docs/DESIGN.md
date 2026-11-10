@@ -1188,16 +1188,6 @@ pepper 由 `SECRET_KEY` 派生（`SHA-256(SECRET_KEY + "|password-v1")`），初
 | M7 | 三语言（含推送文案）、PWA 清单与图标、空状态、动画、导出导入 | 语言切换无硬编码残留；可添加到主屏幕 |
 | M8 | 文档：README（本地开发、部署、运维、限制） | 线上可用 |
 
-M0 平台验证结论（已实测）：
-
-| 验证项 | 结论 |
-|---|---|
-| `Intl.supportedValuesOf('timeZone')` | 可用，返回 418 个时区，直接用于时区下拉 |
-| `[assets] run_worker_first = ["/api/*"]` | 符合预期：`/api/*` 进入 Worker，其余路径由静态资源服务，未知路径回落到 `index.html` |
-| 本地手动触发定时任务 | 使用 `curl http://localhost:8787/cdn-cgi/local/scheduled`，无需 `--test-scheduled` |
-| `color-mix()` 卡片配色 | 可用，浅色/深色两套配方均正常渲染 |
-| PBKDF2-SHA256 耗时 | 100,000 次迭代约 47ms，远超免费版 10ms；按 10,000 次（约 5ms）实现，详见 NFR-2 |
-
 ---
 
 ## 11. 验收标准

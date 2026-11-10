@@ -1,5 +1,7 @@
 # 日期提醒 · date_alert
 
+**简体中文** · [English](README.en.md)
+
 部署在 Cloudflare 上的极简日期倒计时提醒：**公开卡片墙 + 后台管理 + Bark 定时推送**。
 
 只使用 Cloudflare 自身资源（Workers / D1 / Cron Triggers），**不需要域名，也不需要邮件服务**。
@@ -106,9 +108,8 @@ npm run dev                      # 构建前端 + 启动 Worker(8787) 与 Vite(5
 1. 打开 `https://<你的-worker>.workers.dev`
 2. 首次访问会自动跳到 **初始化页**，自己设定管理员密码即可完成初始化
 
-> 为什么不是"看终端里的初始密码"？因为一键部署的构建跑在 Cloudflare CI 里，没有交互式终端。
-> 所以首次访问时由你**自己设定**密码，而不是生成一个随机密码再去找它。
-> 想防止别人抢先初始化，可在部署时额外配置一个 `SETUP_TOKEN`（见下）。
+> 一键部署的构建在 Cloudflare CI 中执行，没有交互式终端，因此初始密码由你在首次访问时设定。
+> 想防止他人抢先初始化，可在部署时额外配置一个 `SETUP_TOKEN`（见下）。
 
 **可选加固：SETUP_TOKEN**
 
